@@ -6,19 +6,21 @@
     <title>LexSuite Legal Health Check</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet" />
     <style>
       :root {
         color-scheme: dark;
         font-family: "DM Sans", system-ui, sans-serif;
         background: #00162e;
-        color: #F7FBFF;
+        color: #f7fbff;
         --surface: rgba(1, 24, 46, 0.96);
-        --accent: #00D8CC;
+        --accent: #00d8cc;
         --accent-soft: rgba(0, 216, 204, 0.14);
         --accent-light: rgba(70, 240, 231, 0.18);
-        --secondary: #0B2347;
-        --text-muted: #C8D8E3;
+        --secondary: #0b2347;
+        --text-muted: #c8d8e3;
         --success: #2d6a4f;
         --warning: #b5830a;
         --danger: #8b1a1a;
@@ -37,10 +39,19 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background: radial-gradient(circle at top left, rgba(0,216,204,0.14), transparent 26%),
-                    radial-gradient(circle at 85% 8%, rgba(255,255,255,0.08), transparent 14%),
-                    linear-gradient(180deg, #002050 0%, #0B2347 64%, #00162e 100%);
-        color: #F7FBFF;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(0, 216, 204, 0.14),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at 85% 8%,
+            rgba(255, 255, 255, 0.08),
+            transparent 14%
+          ),
+          linear-gradient(180deg, #002050 0%, #0b2347 64%, #00162e 100%);
+        color: #f7fbff;
         display: flex;
         justify-content: center;
         padding: 36px 16px 48px;
@@ -52,7 +63,11 @@
         position: fixed;
         inset: 0;
         pointer-events: none;
-        background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-image: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px
+        );
         background-size: 24px 24px;
         opacity: 0.14;
         mix-blend-mode: overlay;
@@ -120,12 +135,16 @@
       }
 
       .card {
-        background: linear-gradient(180deg, rgba(0,32,80,0.94), rgba(11,35,71,0.98));
-        border: 1px solid rgba(255,255,255,0.08);
+        background: linear-gradient(
+          180deg,
+          rgba(0, 32, 80, 0.94),
+          rgba(11, 35, 71, 0.98)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-left: 4px solid var(--accent);
         border-radius: var(--radius);
         padding: 34px;
-        box-shadow: 0 26px 100px rgba(0,0,0,0.28);
+        box-shadow: 0 26px 100px rgba(0, 0, 0, 0.28);
         position: relative;
         overflow: hidden;
         isolation: isolate;
@@ -135,7 +154,11 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at top right, rgba(0,216,204,0.08), transparent 24%);
+        background: radial-gradient(
+          circle at top right,
+          rgba(0, 216, 204, 0.08),
+          transparent 24%
+        );
         pointer-events: none;
         opacity: 0.38;
       }
@@ -148,14 +171,19 @@
         width: 150px;
         height: 150px;
         border-radius: 50%;
-        background: rgba(0,216,204,0.06);
+        background: rgba(0, 216, 204, 0.06);
         pointer-events: none;
       }
 
       .section-divider {
         height: 1px;
         border: none;
-        background: linear-gradient(90deg, transparent, rgba(0,216,204,0.55), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 216, 204, 0.55),
+          transparent
+        );
         margin: 30px 0;
       }
 
@@ -166,12 +194,16 @@
       }
 
       .track-card {
-        border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
         border-radius: 26px;
         padding: 26px;
         cursor: pointer;
-        transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+        transition:
+          transform var(--transition),
+          border-color var(--transition),
+          background var(--transition),
+          box-shadow var(--transition);
         display: grid;
         gap: 14px;
         min-height: 210px;
@@ -182,7 +214,11 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(140deg, rgba(0,216,204,0.04), transparent 55%);
+        background: linear-gradient(
+          140deg,
+          rgba(0, 216, 204, 0.04),
+          transparent 55%
+        );
         opacity: 0;
         transition: opacity var(--transition);
       }
@@ -190,9 +226,9 @@
       .track-card:hover,
       .track-card.active {
         transform: translateY(-4px);
-        border-color: rgba(0,216,204,0.9);
-        background: rgba(0,216,204,0.08);
-        box-shadow: 0 22px 58px rgba(0,0,0,0.22);
+        border-color: rgba(0, 216, 204, 0.9);
+        background: rgba(0, 216, 204, 0.08);
+        box-shadow: 0 22px 58px rgba(0, 0, 0, 0.22);
       }
 
       .track-card:hover::before,
@@ -224,14 +260,18 @@
         left: 0;
         right: 0;
         height: 5px;
-        background: rgba(255,255,255,0.06);
+        background: rgba(255, 255, 255, 0.06);
         z-index: 20;
       }
 
       .progress-bar {
         width: 0%;
         height: 100%;
-        background: linear-gradient(90deg, var(--accent), rgba(70,240,231,0.9));
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          rgba(70, 240, 231, 0.9)
+        );
         transition: width 300ms ease;
       }
 
@@ -254,7 +294,11 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent), rgba(255,255,255,0.85));
+        background: linear-gradient(
+          135deg,
+          var(--accent),
+          rgba(255, 255, 255, 0.85)
+        );
       }
 
       .question-copy {
@@ -270,14 +314,18 @@
       }
 
       .answer-button {
-        border: 1px solid rgba(0,216,204,0.55);
-        background: rgba(255,255,255,0.04);
-        color: #F7FBFF;
+        border: 1px solid rgba(0, 216, 204, 0.55);
+        background: rgba(255, 255, 255, 0.04);
+        color: #f7fbff;
         border-radius: 999px;
         padding: 18px 22px;
         font-size: 1rem;
         cursor: pointer;
-        transition: background var(--transition), transform var(--transition), color var(--transition), box-shadow var(--transition);
+        transition:
+          background var(--transition),
+          transform var(--transition),
+          color var(--transition),
+          box-shadow var(--transition);
         text-align: left;
         position: relative;
         overflow: hidden;
@@ -287,7 +335,11 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at center, rgba(0,216,204,0.16), transparent 40%);
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 216, 204, 0.16),
+          transparent 40%
+        );
         opacity: 0;
         transition: opacity 240ms ease;
       }
@@ -302,7 +354,7 @@
         background: var(--accent);
         color: #111118;
         transform: translateY(-1px);
-        box-shadow: 0 16px 36px rgba(0,216,204,0.16);
+        box-shadow: 0 16px 36px rgba(0, 216, 204, 0.16);
       }
 
       .pager {
@@ -314,17 +366,20 @@
       }
 
       .pager button {
-        border: 1px solid rgba(255,255,255,0.12);
-        background: rgba(255,255,255,0.04);
-        color: #F7FBFF;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: #f7fbff;
         padding: 14px 20px;
         border-radius: 999px;
         cursor: pointer;
-        transition: background var(--transition), transform var(--transition), border-color var(--transition);
+        transition:
+          background var(--transition),
+          transform var(--transition),
+          border-color var(--transition);
       }
 
       .pager button:hover:not(:disabled) {
-        background: rgba(0,216,204,0.14);
+        background: rgba(0, 216, 204, 0.14);
         transform: translateY(-1px);
       }
 
@@ -352,17 +407,17 @@
       }
 
       .score-badge.low {
-        background: rgba(45,106,79,0.18);
+        background: rgba(45, 106, 79, 0.18);
         color: var(--success);
       }
 
       .score-badge.moderate {
-        background: rgba(181,131,10,0.18);
+        background: rgba(181, 131, 10, 0.18);
         color: var(--warning);
       }
 
       .score-badge.high {
-        background: rgba(139,26,26,0.18);
+        background: rgba(139, 26, 26, 0.18);
         color: var(--danger);
       }
 
@@ -385,7 +440,7 @@
       }
 
       .score-circle .track {
-        stroke: rgba(255,255,255,0.08);
+        stroke: rgba(255, 255, 255, 0.08);
       }
 
       .score-circle .progress {
@@ -403,7 +458,7 @@
         font-size: clamp(3rem, 8vw, 5rem);
         font-weight: 700;
         letter-spacing: -0.05em;
-        color: #F7FBFF;
+        color: #f7fbff;
       }
 
       .breakdown {
@@ -417,9 +472,9 @@
         display: grid;
         gap: 10px;
         padding: 22px 22px 22px 20px;
-        border: 1px solid rgba(255,255,255,0.08);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 22px;
-        background: rgba(255,255,255,0.02);
+        background: rgba(255, 255, 255, 0.02);
         overflow: hidden;
         position: relative;
       }
@@ -436,7 +491,7 @@
       }
 
       .breakdown-item strong {
-        color: #F7FBFF;
+        color: #f7fbff;
         display: block;
         font-size: 1rem;
       }
@@ -465,21 +520,24 @@
       .field-group input,
       .field-group select {
         width: 100%;
-        border: 1px solid rgba(255,255,255,0.12);
-        background: rgba(255,255,255,0.04);
-        color: #F7FBFF;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: #f7fbff;
         border-radius: 16px;
         padding: 16px 18px;
         font: inherit;
         outline: none;
-        transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+        transition:
+          border-color var(--transition),
+          background var(--transition),
+          box-shadow var(--transition);
       }
 
       .field-group input:focus,
       .field-group select:focus {
-        border-color: rgba(0,216,204,0.85);
-        background: rgba(255,255,255,0.08);
-        box-shadow: 0 0 0 4px rgba(0,216,204,0.08);
+        border-color: rgba(0, 216, 204, 0.85);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 4px rgba(0, 216, 204, 0.08);
       }
 
       .submit-button {
@@ -490,14 +548,17 @@
         border-radius: 999px;
         font-size: 1rem;
         cursor: pointer;
-        transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+        transition:
+          transform var(--transition),
+          filter var(--transition),
+          box-shadow var(--transition);
         width: fit-content;
       }
 
       .submit-button:hover {
         transform: translateY(-1px);
         filter: brightness(1.05);
-        box-shadow: 0 18px 40px rgba(0,216,204,0.22);
+        box-shadow: 0 18px 40px rgba(0, 216, 204, 0.22);
       }
 
       .confirmation {
@@ -524,21 +585,24 @@
       }
 
       .restart-button {
-        border: 1px solid rgba(255,255,255,0.12);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         background: transparent;
-        color: #F7FBFF;
+        color: #f7fbff;
         padding: 16px 22px;
         border-radius: 999px;
         cursor: pointer;
-        transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+        transition:
+          background var(--transition),
+          transform var(--transition),
+          box-shadow var(--transition);
         width: fit-content;
         justify-self: center;
       }
 
       .restart-button:hover {
-        background: rgba(0,216,204,0.12);
+        background: rgba(0, 216, 204, 0.12);
         transform: translateY(-1px);
-        box-shadow: 0 18px 36px rgba(0,216,204,0.16);
+        box-shadow: 0 18px 36px rgba(0, 216, 204, 0.16);
       }
 
       .page-enter {
@@ -572,50 +636,154 @@
     </style>
   </head>
   <body>
-    <div class="progress-shell" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="progress-shell" aria-hidden="true">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
     <main class="container" id="app"></main>
     <script>
       const data = {
         tracks: {
           A: {
             label: "General Legal & Compliance Health Check",
-            description: "A premium diagnostic of CAC registration, corporate governance, NDPA readiness and commercial contracts for Nigerian startups and SMEs.",
+            description:
+              "A premium diagnostic of CAC registration, corporate governance, NDPA readiness and commercial contracts for Nigerian startups and SMEs.",
             total: 10,
             questions: [
-              { text: "Is your business registered with the Corporate Affairs Commission (CAC)?", consequence: "An unregistered business cannot open a corporate bank account, sign enforceable contracts, or attract legitimate investment." },
-              { text: "Does your company have a properly structured share capital and allotment?", consequence: "Improper share structure causes investor due diligence failures and co-founder disputes with no legal resolution mechanism." },
-              { text: "Do all founders have a signed Founders Agreement or Shareholders Agreement?", consequence: "Without a founders agreement, a departing co-founder can retain equity and paralyse company decisions." },
-              { text: "Are all intellectual property assets (code, brand, content) formally assigned to the company?", consequence: "IP created by founders or contractors before formal assignment legally belongs to the individual, not the company — a deal-killer in due diligence." },
-              { text: "Does the company have written contracts with all service providers, vendors, and freelancers?", consequence: "Verbal agreements are nearly impossible to enforce; undocumented relationships become expensive disputes." },
-              { text: "Has the company appointed a Data Protection Officer or conducted a NDPA 2023 compliance audit?", consequence: "Unregistered data controllers face NDPC enforcement actions including fines and reputational sanctions." },
-              { text: "Does the company have a Privacy Policy and Terms of Service that comply with NDPA 2023?", consequence: "Operating a website or app without a compliant privacy policy is a direct NDPA violation." },
-              { text: "Has the company filed its annual returns with the CAC this year?", consequence: "Failure to file annual returns for two consecutive years triggers CAC strike-off proceedings." },
-              { text: "Does the company have the required sector-specific licences and permits for its industry?", consequence: "Operating without required sector licences exposes the company to regulatory shutdown and personal director liability." },
-              { text: "Does the company have a Data Processing Agreement with all third-party processors handling customer data?", consequence: "Transferring customer data to third parties without a DPA is an NDPA violation with fine exposure per affected data subject." }
-            ]
+              {
+                text: "Is your business registered with the Corporate Affairs Commission (CAC)?",
+                consequence:
+                  "An unregistered business cannot open a corporate bank account, sign enforceable contracts, or attract legitimate investment.",
+              },
+              {
+                text: "Does your company have a properly structured share capital and allotment?",
+                consequence:
+                  "Improper share structure causes investor due diligence failures and co-founder disputes with no legal resolution mechanism.",
+              },
+              {
+                text: "Do all founders have a signed Founders Agreement or Shareholders Agreement?",
+                consequence:
+                  "Without a founders agreement, a departing co-founder can retain equity and paralyse company decisions.",
+              },
+              {
+                text: "Are all intellectual property assets (code, brand, content) formally assigned to the company?",
+                consequence:
+                  "IP created by founders or contractors before formal assignment legally belongs to the individual, not the company — a deal-killer in due diligence.",
+              },
+              {
+                text: "Does the company have written contracts with all service providers, vendors, and freelancers?",
+                consequence:
+                  "Verbal agreements are nearly impossible to enforce; undocumented relationships become expensive disputes.",
+              },
+              {
+                text: "Has the company appointed a Data Protection Officer or conducted a NDPA 2023 compliance audit?",
+                consequence:
+                  "Unregistered data controllers face NDPC enforcement actions including fines and reputational sanctions.",
+              },
+              {
+                text: "Does the company have a Privacy Policy and Terms of Service that comply with NDPA 2023?",
+                consequence:
+                  "Operating a website or app without a compliant privacy policy is a direct NDPA violation.",
+              },
+              {
+                text: "Has the company filed its annual returns with the CAC this year?",
+                consequence:
+                  "Failure to file annual returns for two consecutive years triggers CAC strike-off proceedings.",
+              },
+              {
+                text: "Does the company have the required sector-specific licences and permits for its industry?",
+                consequence:
+                  "Operating without required sector licences exposes the company to regulatory shutdown and personal director liability.",
+              },
+              {
+                text: "Does the company have a Data Processing Agreement with all third-party processors handling customer data?",
+                consequence:
+                  "Transferring customer data to third parties without a DPA is an NDPA violation with fine exposure per affected data subject.",
+              },
+            ],
           },
           B: {
             label: "AI Legal Compliance Check",
-            description: "An AI-specific assessment for Nigerian businesses to benchmark data sourcing, disclosure, liability and governance against NDPA and emerging AI policy risk.",
+            description:
+              "An AI-specific assessment for Nigerian businesses to benchmark data sourcing, disclosure, liability and governance against NDPA and emerging AI policy risk.",
             total: 15,
             questions: [
-              { text: "Was the data used to train or fine-tune your AI system sourced with clear copyright clearance or licence?", consequence: "Using scraped or unlicensed data for AI training creates copyright infringement liability — the Thomson Reuters ruling (2025) confirmed this is not fair use." },
-              { text: "Have data subjects whose data is processed by your AI systems given informed consent under NDPA 2023?", consequence: "Processing personal data in AI systems without a lawful basis is an NDPA violation attracting fines and enforcement action." },
-              { text: "Do you disclose to users when decisions affecting them are made by automated AI systems?", consequence: "NDPA 2023 gives individuals the right to know about automated decision-making — undisclosed AI decisions are legally challengeable." },
-              { text: "Has your AI system been audited for algorithmic bias that could discriminate against protected groups?", consequence: "Biased AI decisions in credit, hiring, or access create liability for discriminatory outcomes even without discriminatory intent." },
-              { text: "Does the company have a written policy governing liability for transactions or decisions made by autonomous AI agents?", consequence: "When an AI agent makes an erroneous purchase, refund, or commitment, unclear liability policy means the company bears the full loss with no contractual recourse." },
-              { text: "Does the company have a deepfake and synthetic media policy covering employee likenesses and brand identity?", consequence: "Without a policy, synthetic impersonation of executives or brand voice creates both reputational and legal exposure with no prepared response framework." },
-              { text: "Do your contracts with AI vendors and tool providers include clear liability and data ownership clauses?", consequence: "Default AI vendor terms typically assign ownership of your data inputs to the vendor — without negotiated clauses, you may lose rights to your own business data." },
-              { text: "Are employees informed in writing about any AI-powered monitoring tools used in the workplace?", consequence: "Covert employee monitoring via AI tools violates NDPA 2023 transparency requirements and creates wrongful treatment claims." },
-              { text: "Are IP ownership rights in AI-generated outputs formally assigned to the company in your employment and contractor agreements?", consequence: "AI-generated work created by employees or contractors may not automatically belong to the company without explicit IP assignment clauses." },
-              { text: "Does the company maintain documentation of its AI models including training data sources, model versions, and performance benchmarks?", consequence: "Undocumented AI systems cannot be audited, defended in litigation, or submitted to regulators — creating unmanageable liability exposure." },
-              { text: "Have you reviewed whether your AI tools share customer or employee data with third-party model providers?", consequence: "Most AI tools process inputs on external servers — unknowing data transfers to foreign processors may violate NDPA cross-border transfer restrictions." },
-              { text: "Does the company have an AI incident response plan for failures, biased outputs, or data breaches caused by AI systems?", consequence: "Without an incident response plan, an AI failure becomes a crisis with no playbook — maximising both damage and reputational harm." },
-              { text: "Does the company have a written AI ethics or responsible AI use policy?", consequence: "The absence of a responsible AI policy is increasingly a disqualifying gap in investor due diligence and enterprise procurement processes." },
-              { text: "Has the company assessed compliance with NDPA 2023 Article 32 on automated processing and profiling?", consequence: "Automated profiling without a compliant framework exposes the company to individual rights claims and NDPC enforcement." },
-              { text: "Does the company have a documented AI governance framework approved at board or management level?", consequence: "Without board-level AI governance, liability for AI-related harms defaults to individual directors under Nigerian company law." }
-            ]
-          }
+              {
+                text: "Was the data used to train or fine-tune your AI system sourced with clear copyright clearance or licence?",
+                consequence:
+                  "Using scraped or unlicensed data for AI training creates copyright infringement liability — the Thomson Reuters ruling (2025) confirmed this is not fair use.",
+              },
+              {
+                text: "Have data subjects whose data is processed by your AI systems given informed consent under NDPA 2023?",
+                consequence:
+                  "Processing personal data in AI systems without a lawful basis is an NDPA violation attracting fines and enforcement action.",
+              },
+              {
+                text: "Do you disclose to users when decisions affecting them are made by automated AI systems?",
+                consequence:
+                  "NDPA 2023 gives individuals the right to know about automated decision-making — undisclosed AI decisions are legally challengeable.",
+              },
+              {
+                text: "Has your AI system been audited for algorithmic bias that could discriminate against protected groups?",
+                consequence:
+                  "Biased AI decisions in credit, hiring, or access create liability for discriminatory outcomes even without discriminatory intent.",
+              },
+              {
+                text: "Does the company have a written policy governing liability for transactions or decisions made by autonomous AI agents?",
+                consequence:
+                  "When an AI agent makes an erroneous purchase, refund, or commitment, unclear liability policy means the company bears the full loss with no contractual recourse.",
+              },
+              {
+                text: "Does the company have a deepfake and synthetic media policy covering employee likenesses and brand identity?",
+                consequence:
+                  "Without a policy, synthetic impersonation of executives or brand voice creates both reputational and legal exposure with no prepared response framework.",
+              },
+              {
+                text: "Do your contracts with AI vendors and tool providers include clear liability and data ownership clauses?",
+                consequence:
+                  "Default AI vendor terms typically assign ownership of your data inputs to the vendor — without negotiated clauses, you may lose rights to your own business data.",
+              },
+              {
+                text: "Are employees informed in writing about any AI-powered monitoring tools used in the workplace?",
+                consequence:
+                  "Covert employee monitoring via AI tools violates NDPA 2023 transparency requirements and creates wrongful treatment claims.",
+              },
+              {
+                text: "Are IP ownership rights in AI-generated outputs formally assigned to the company in your employment and contractor agreements?",
+                consequence:
+                  "AI-generated work created by employees or contractors may not automatically belong to the company without explicit IP assignment clauses.",
+              },
+              {
+                text: "Does the company maintain documentation of its AI models including training data sources, model versions, and performance benchmarks?",
+                consequence:
+                  "Undocumented AI systems cannot be audited, defended in litigation, or submitted to regulators — creating unmanageable liability exposure.",
+              },
+              {
+                text: "Have you reviewed whether your AI tools share customer or employee data with third-party model providers?",
+                consequence:
+                  "Most AI tools process inputs on external servers — unknowing data transfers to foreign processors may violate NDPA cross-border transfer restrictions.",
+              },
+              {
+                text: "Does the company have an AI incident response plan for failures, biased outputs, or data breaches caused by AI systems?",
+                consequence:
+                  "Without an incident response plan, an AI failure becomes a crisis with no playbook — maximising both damage and reputational harm.",
+              },
+              {
+                text: "Does the company have a written AI ethics or responsible AI use policy?",
+                consequence:
+                  "The absence of a responsible AI policy is increasingly a disqualifying gap in investor due diligence and enterprise procurement processes.",
+              },
+              {
+                text: "Has the company assessed compliance with NDPA 2023 Article 32 on automated processing and profiling?",
+                consequence:
+                  "Automated profiling without a compliant framework exposes the company to individual rights claims and NDPC enforcement.",
+              },
+              {
+                text: "Does the company have a documented AI governance framework approved at board or management level?",
+                consequence:
+                  "Without board-level AI governance, liability for AI-related harms defaults to individual directors under Nigerian company law.",
+              },
+            ],
+          },
         },
         leadOptions: [
           "CAC/Incorporation",
@@ -623,14 +791,14 @@
           "NDPA Compliance",
           "AI Governance",
           "Investor Readiness",
-          "Not sure yet"
-        ]
+          "Not sure yet",
+        ],
       };
 
       const state = {
         track: null,
         index: 0,
-        answers: []
+        answers: [],
       };
 
       const utils = {
@@ -662,13 +830,16 @@
         shake(selector) {
           const node = document.querySelector(selector);
           if (!node) return;
-          node.animate([
-            { transform: "translateX(0)" },
-            { transform: "translateX(-10px)" },
-            { transform: "translateX(10px)" },
-            { transform: "translateX(0)" }
-          ], { duration: 260, easing: "ease-in-out" });
-        }
+          node.animate(
+            [
+              { transform: "translateX(0)" },
+              { transform: "translateX(-10px)" },
+              { transform: "translateX(10px)" },
+              { transform: "translateX(0)" },
+            ],
+            { duration: 260, easing: "ease-in-out" },
+          );
+        },
       };
 
       const compute = {
@@ -681,20 +852,29 @@
         },
         score() {
           const track = this.currentTrack();
-          const yesCount = state.answers.filter(answer => answer === "Yes").length;
+          const yesCount = state.answers.filter(
+            (answer) => answer === "Yes",
+          ).length;
           const percent = Math.round((yesCount / track.total) * 100);
-          const output = { percent, tier: "high", copy: "You have critical exposure. This needs immediate attention.", icon: "✕" };
+          const output = {
+            percent,
+            tier: "high",
+            copy: "You have critical exposure. This needs immediate attention.",
+            icon: "✕",
+          };
           if (percent >= 80) {
             output.tier = "low";
-            output.copy = "Your legal foundation is strong. Let's keep it that way.";
+            output.copy =
+              "Your legal foundation is strong. Let's keep it that way.";
             output.icon = "⚖";
           } else if (percent >= 50) {
             output.tier = "moderate";
-            output.copy = "You have gaps that could cost you at the worst time.";
+            output.copy =
+              "You have gaps that could cost you at the worst time.";
             output.icon = "⚠";
           }
           return output;
-        }
+        },
       };
 
       const render = {
@@ -712,13 +892,17 @@
             </section>
             <div class="card">
               <div class="grid-2">
-                ${Object.entries(data.tracks).map(([key, track]) => `
+                ${Object.entries(data.tracks)
+                  .map(
+                    ([key, track]) => `
                   <button type="button" class="track-card" data-track="${key}" aria-label="Choose ${track.label}">
                     <h3>${track.label}</h3>
                     <p>${track.description}</p>
                     <footer>${track.total} question${track.total > 1 ? "s" : ""}</footer>
                   </button>
-                `).join("")}
+                `,
+                  )
+                  .join("")}
               </div>
             </div>
           `);
@@ -734,9 +918,13 @@
               <div class="question-index"><span></span> Question ${state.index + 1} of ${track.total}</div>
               <h2 class="question-copy">${question.text}</h2>
               <div class="answer-buttons">
-                ${["Yes", "No", "Not Sure"].map(answer => `
+                ${["Yes", "No", "Not Sure"]
+                  .map(
+                    (answer) => `
                   <button type="button" class="answer-button" data-answer="${answer}">${answer}</button>
-                `).join("")}
+                `,
+                  )
+                  .join("")}
               </div>
               <div class="pager">
                 <button type="button" id="backButton" ${state.index === 0 ? "disabled" : ""}>Back</button>
@@ -745,7 +933,9 @@
             </section>
           `);
           if (state.answers[state.index]) {
-            const selected = utils.root.querySelector(`.answer-button[data-answer="${state.answers[state.index]}"]`);
+            const selected = utils.root.querySelector(
+              `.answer-button[data-answer="${state.answers[state.index]}"]`,
+            );
             selected?.classList.add("selected");
           }
           render.attachQuestionEvents();
@@ -753,7 +943,12 @@
         score() {
           const track = data.tracks[state.track];
           const summary = compute.score();
-          const concerns = track.questions.map((question, index) => ({ question, answer: state.answers[index] })).filter(item => item.answer !== "Yes");
+          const concerns = track.questions
+            .map((question, index) => ({
+              question,
+              answer: state.answers[index],
+            }))
+            .filter((item) => item.answer !== "Yes");
           utils.updateProgress(100);
           utils.render(`
             <section class="card score-shell">
@@ -769,12 +964,16 @@
               <hr class="section-divider" />
               <div class="breakdown">
                 <h3 style="font-family: 'Cormorant Garamond', serif; margin:0;">Areas of concern</h3>
-                ${concerns.map(item => `
+                ${concerns
+                  .map(
+                    (item) => `
                   <div class="breakdown-item">
                     <strong>${item.question.text}</strong>
                     <span>${item.question.consequence}</span>
                   </div>
-                `).join("")}
+                `,
+                  )
+                  .join("")}
               </div>
               <hr class="section-divider" />
               <div class="form-grid">
@@ -785,7 +984,7 @@
                 <div class="field-group">
                   <label for="urgent">What's most urgent for you right now?</label>
                   <select id="urgent">
-                    ${data.leadOptions.map(option => `<option value="${option}">${option}</option>`).join("")}
+                    ${data.leadOptions.map((option) => `<option value="${option}">${option}</option>`).join("")}
                   </select>
                 </div>
                 <button type="button" class="submit-button" id="submitForm">Get My Free Audit Call</button>
@@ -794,12 +993,15 @@
           `);
           const circle = document.querySelector(".progress");
           const circumference = 2 * Math.PI * 70;
-          const offset = circumference - (summary.percent / 100) * circumference;
+          const offset =
+            circumference - (summary.percent / 100) * circumference;
           requestAnimationFrame(() => {
             if (circle) circle.style.strokeDashoffset = offset;
             utils.countUp(summary.percent, "scoreValue");
           });
-          document.getElementById("submitForm").addEventListener("click", actions.submitLead);
+          document
+            .getElementById("submitForm")
+            .addEventListener("click", actions.submitLead);
         },
         confirmation(payload) {
           utils.updateProgress(100);
@@ -817,7 +1019,9 @@
               <button type="button" class="restart-button" id="restartButton">Restart assessment</button>
             </section>
           `);
-          document.getElementById("restartButton").addEventListener("click", actions.restart);
+          document
+            .getElementById("restartButton")
+            .addEventListener("click", actions.restart);
         },
         field(id, label, placeholder, type = "text") {
           return `
@@ -828,19 +1032,25 @@
           `;
         },
         attachTrackEvents() {
-          document.querySelectorAll(".track-card").forEach(card => {
-            card.addEventListener("click", event => {
+          document.querySelectorAll(".track-card").forEach((card) => {
+            card.addEventListener("click", (event) => {
               actions.chooseTrack(event.currentTarget.dataset.track);
             });
           });
         },
         attachQuestionEvents() {
-          document.querySelectorAll(".answer-button").forEach(button => {
-            button.addEventListener("click", () => actions.selectAnswer(button.dataset.answer));
+          document.querySelectorAll(".answer-button").forEach((button) => {
+            button.addEventListener("click", () =>
+              actions.selectAnswer(button.dataset.answer),
+            );
           });
-          document.getElementById("backButton").addEventListener("click", actions.back);
-          document.getElementById("nextButton").addEventListener("click", actions.next);
-        }
+          document
+            .getElementById("backButton")
+            .addEventListener("click", actions.back);
+          document
+            .getElementById("nextButton")
+            .addEventListener("click", actions.next);
+        },
       };
 
       const actions = {
@@ -852,8 +1062,11 @@
         },
         selectAnswer(answer) {
           state.answers[state.index] = answer;
-          document.querySelectorAll(".answer-button").forEach(button => {
-            button.classList.toggle("selected", button.dataset.answer === answer);
+          document.querySelectorAll(".answer-button").forEach((button) => {
+            button.classList.toggle(
+              "selected",
+              button.dataset.answer === answer,
+            );
           });
         },
         back() {
@@ -885,14 +1098,14 @@
             company: document.getElementById("company").value.trim(),
             urgency: document.getElementById("urgent").value,
             track: data.tracks[state.track].label,
-            score: compute.score()
+            score: compute.score(),
           };
           console.log("Lead submission:", payload);
           render.confirmation(payload);
         },
         restart() {
           render.landing();
-        }
+        },
       };
 
       document.addEventListener("DOMContentLoaded", () => render.landing());
