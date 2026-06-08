@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LexSuite Legal Health Check</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #0A0A0F;
+      color: #F0EDE6;
+      --surface: #111118;
+      --accent: #C9A84C;
+      --accent-soft: rgba(201, 168, 76, 0.12);
+      --secondary: #1A3A5C;
+      --text-muted: #8A8A9A;
+      --success: #2D6A4F;
+      --warning: #B5830A;
+      --danger: #8B1A1A;
+      --radius: 28px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, rgba(201,168,76,0.08), transparent 28%),
+                  linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.18));
+      background-color: #0A0A0F;
+      color: #F0EDE6;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.14;
+      mix-blend-mode: overlay;
+    }
+
+    .container {
+      width: min(100%, 640px);
+      display: grid;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      display: grid;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand::after {
+      content: '';
+      display: block;
+      width: 72px;
+      height: 1px;
+      margin: 10px auto 0;
+      background: var(--accent);
+      opacity: 0.8;
+    }
+
+    .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      line-height: 1.02;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: 0 18px 80px rgba(0,0,0,0.24);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(201,168,76,0.08), transparent 22%);
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    .section-divider {
+      height: 1px;
+      border: none;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.45), transparent);
+      margin: 28px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .track-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      border-radius: 24px;
+      padding: 24px;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+      display: grid;
+      gap: 12px;
+      min-height: 220px;
+    }
+
+    .track-card:hover,
+    .track-card.active {
+      transform: translateY(-3px);
+      border-color: rgba(201,168,76,0.8);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .track-card h3 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .track-card p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .progress-shell {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      z-index: 20;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), rgba(201,168,76,0.8));
+      transition: width 300ms ease;
+    }
+
+    .question-panel {
+      display: grid;
+      gap: 24px;
+    }
+
+    .question-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+    }
+
+    .question-index span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .question-copy {
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      line-height: 1.15;
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .answer-buttons {
+      display: grid;
+      gap: 14px;
+    }
+
+    .answer-button {
+      border: 1px solid rgba(201,168,76,0.55);
+      background: transparent;
+      color: #F0EDE6;
+      border-radius: 999px;
+      padding: 18px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), color var(--transition);
+      text-align: left;
+    }
+
+    .answer-button:hover,
+    .answer-button.selected {
+      background: var(--accent);
+      color: #111118;
+      transform: translateY(-1px);
+    }
+
+    .pager {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .pager button {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: #F0EDE6;
+      padding: 14px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .pager button:hover:not(:disabled) {
+      background: rgba(201,168,76,0.12);
+      transform: translateY(-1px);
+    }
+
+    .pager button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .score-shell {
+      display: grid;
+      gap: 28px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .score-badge.low { background: rgba(45,106,79,0.16); color: var(--success); }
+    .score-badge.moderate { background: rgba(181,131,10,0.16); color: var(--warning); }
+    .score-badge.high { background: rgba(139,26,26,0.16); color: var(--danger); }
+
+    .score-circle {
+      width: min(280px, 100%);
+      height: min(280px, 100%);
+      position: relative;
+    }
+
+    .score-circle svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .score-circle circle {
+      fill: none;
+      stroke-width: 18;
+      stroke-linecap: round;
+    }
+
+    .score-circle .track {
+      stroke: rgba(255,255,255,0.08);
+    }
+
+    .score-circle .progress {
+      stroke: var(--accent);
+      stroke-dasharray: 440;
+      stroke-dashoffset: 440;
+      transition: stroke-dashoffset 1.2s ease;
+    }
+
+    .score-value {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: #F0EDE6;
+    }
+
+    .breakdown {
+      display: grid;
+      gap: 16px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .breakdown-item {
+      display: grid;
+      gap: 8px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .breakdown-item strong {
+      color: #F0EDE6;
+      display: block;
+      font-size: 1rem;
+    }
+
+    .breakdown-item span {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .field-group label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .field-group input,
+    .field-group select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: #F0EDE6;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font: inherit;
+      outline: none;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .field-group input:focus,
+    .field-group select:focus {
+      border-color: rgba(201,168,76,0.75);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .submit-button {
+      border: none;
+      background: var(--accent);
+      color: #111118;
+      padding: 18px 24px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform var(--transition), filter var(--transition);
+      width: fit-content;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .confirmation {
+      display: grid;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .confirmation p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .contact-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .restart-button {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
+      color: #F0EDE6;
+      padding: 16px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      width: fit-content;
+      justify-self: center;
+    }
+
+    .restart-button:hover {
+      background: rgba(201,168,76,0.12);
+      transform: translateY(-1px);
+    }
+
+    .fade-enter {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .fade-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 320ms ease, transform 320ms ease;
+    }
+
+    .tier-copy {
+      max-width: 640px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card { padding: 24px; }
+      .answer-buttons { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-shell" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+  <main class="container" id="app"></main>
+
+  <script>
+    const appState = {
+      track: null,
+      currentIndex: 0,
+      answers: [],
+      submission: null,
+    };
+
+    const tracks = {
+      A: {
+        label: 'General Legal & Compliance Health Check',
+        description: 'A premium diagnostic of CAC registration, corporate governance, NDPA readiness and commercial contracts for Nigerian startups and SMEs.',
+        total: 10,
+        questions: [
+          { text: 'Is your business registered with the Corporate Affairs Commission (CAC)?', consequence: 'An unregistered business cannot open a corporate bank account, sign enforceable contracts, or attract legitimate investment.' },
+          { text: 'Does your company have a properly structured share capital and allotment?', consequence: 'Improper share structure causes investor due diligence failures and co-founder disputes with no legal resolution mechanism.' },
+          { text: 'Do all founders have a signed Founders Agreement or Shareholders Agreement?', consequence: 'Without a founders agreement, a departing co-founder can retain equity and paralyse company decisions.' },
+          { text: 'Are all intellectual property assets (code, brand, content) formally assigned to the company?', consequence: 'IP created by founders or contractors before formal assignment legally belongs to the individual, not the company — a deal-killer in due diligence.' },
+          { text: 'Does the company have written contracts with all service providers, vendors, and freelancers?', consequence: 'Verbal agreements are nearly impossible to enforce; undocumented relationships become expensive disputes.' },
+          { text: 'Has the company appointed a Data Protection Officer or conducted a NDPA 2023 compliance audit?', consequence: 'Unregistered data controllers face NDPC enforcement actions including fines and reputational sanctions.' },
+          { text: 'Does the company have a Privacy Policy and Terms of Service that comply with NDPA 2023?', consequence: 'Operating a website or app without a compliant privacy policy is a direct NDPA violation.' },
+          { text: 'Has the company filed its annual returns with the CAC this year?', consequence: 'Failure to file annual returns for two consecutive years triggers CAC strike-off proceedings.' },
+          { text: 'Does the company have the required sector-specific licences and permits for its industry?', consequence: 'Operating without required sector licences exposes the company to regulatory shutdown and personal director liability.' },
+          { text: 'Does the company have a Data Processing Agreement with all third-party processors handling customer data?', consequence: 'Transferring customer data to third parties without a DPA is an NDPA violation with fine exposure per affected data subject.' },
+        ],
+      },
+      B: {
+        label: 'AI Legal Compliance Check',
+        description: 'An AI-specific assessment for Nigerian businesses to benchmark data sourcing, disclosure, liability and governance against NDPA and emerging AI policy risk.',
+        total: 15,
+        questions: [
+          { text: 'Was the data used to train or fine-tune your AI system sourced with clear copyright clearance or licence?', consequence: 'Using scraped or unlicensed data for AI training creates copyright infringement liability — the Thomson Reuters ruling (2025) confirmed this is not fair use.' },
+          { text: 'Have data subjects whose data is processed by your AI systems given informed consent under NDPA 2023?', consequence: 'Processing personal data in AI systems without a lawful basis is an NDPA violation attracting fines and enforcement action.' },
+          { text: 'Do you disclose to users when decisions affecting them are made by automated AI systems?', consequence: 'NDPA 2023 gives individuals the right to know about automated decision-making — undisclosed AI decisions are legally challengeable.' },
+          { text: 'Has your AI system been audited for algorithmic bias that could discriminate against protected groups?', consequence: 'Biased AI decisions in credit, hiring, or access create liability for discriminatory outcomes even without discriminatory intent.' },
+          { text: 'Does the company have a written policy governing liability for transactions or decisions made by autonomous AI agents?', consequence: 'When an AI agent makes an erroneous purchase, refund, or commitment, unclear liability policy means the company bears the full loss with no contractual recourse.' },
+          { text: 'Does the company have a deepfake and synthetic media policy covering employee likenesses and brand identity?', consequence: 'Without a policy, synthetic impersonation of executives or brand voice creates both reputational and legal exposure with no prepared response framework.' },
+          { text: 'Do your contracts with AI vendors and tool providers include clear liability and data ownership clauses?', consequence: 'Default AI vendor terms typically assign ownership of your data inputs to the vendor — without negotiated clauses, you may lose rights to your own business data.' },
+          { text: 'Are employees informed in writing about any AI-powered monitoring tools used in the workplace?', consequence: 'Covert employee monitoring via AI tools violates NDPA 2023 transparency requirements and creates wrongful treatment claims.' },
+          { text: 'Are IP ownership rights in AI-generated outputs formally assigned to the company in your employment and contractor agreements?', consequence: 'AI-generated work created by employees or contractors may not automatically belong to the company without explicit IP assignment clauses.' },
+          { text: 'Does the company maintain documentation of its AI models including training data sources, model versions, and performance benchmarks?', consequence: 'Undocumented AI systems cannot be audited, defended in litigation, or submitted to regulators — creating unmanageable liability exposure.' },
+          { text: 'Have you reviewed whether your AI tools share customer or employee data with third-party model providers?', consequence: 'Most AI tools process inputs on external servers — unknowing data transfers to foreign processors may violate NDPA cross-border transfer restrictions.' },
+          { text: 'Does the company have an AI incident response plan for failures, biased outputs, or data breaches caused by AI systems?', consequence: 'Without an incident response plan, an AI failure becomes a crisis with no playbook — maximising both damage and reputational harm.' },
+          { text: 'Does the company have a written AI ethics or responsible AI use policy?', consequence: 'The absence of a responsible AI policy is increasingly a disqualifying gap in investor due diligence and enterprise procurement processes.' },
+          { text: 'Has the company assessed compliance with NDPA 2023 Article 32 on automated processing and profiling?', consequence: 'Automated profiling without a compliant framework exposes the company to individual rights claims and NDPC enforcement.' },
+          { text: 'Does the company have a documented AI governance framework approved at board or management level?', consequence: 'Without board-level AI governance, liability for AI-related harms defaults to individual directors under Nigerian company law.' },
+        ],
+      },
+    };
+
+    const app = {
+      init() {
+        this.root = document.getElementById('app');
+        this.progressBar = document.getElementById('progressBar');
+        this.renderLanding();
+      },
+
+      renderLanding() {
+        appState.track = null;
+        appState.currentIndex = 0;
+        appState.answers = [];
+        this.updateProgress(0);
+        this.root.innerHTML = `
+          <section class="header fade-enter fade-enter-active">
+            <div class="brand">LexSuite Solicitors</div>
+            <h1 class="title">LexSuite Legal Health Check</h1>
+            <p class="subtitle">Know your legal exposure before it costs you. Choose the diagnostic track that fits your startup or SME and receive a premium compliance health assessment.</p>
+          </section>
+          <div class="card fade-enter fade-enter-active">
+            <div class="grid-2">
+              ${Object.entries(tracks).map(([key, track]) => `
+                <button type="button" class="track-card" data-track="${key}" aria-label="Select track ${track.label}">
+                  <h3>${track.label}</h3>
+                  <p>${track.description}</p>
+                  <div style="color: var(--text-muted); font-size: 0.88rem;">${track.total} question${track.total > 1 ? 's' : ''}</div>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        this.root.querySelectorAll('.track-card').forEach(card => {
+          card.addEventListener('click', event => {
+            const selected = event.currentTarget.dataset.track;
+            this.startTrack(selected);
+          });
+        });
+      },
+
+      startTrack(trackKey) {
+        appState.track = trackKey;
+        appState.currentIndex = 0;
+        appState.answers = new Array(tracks[trackKey].total).fill(null);
+        this.renderQuestion();
+      },
+
+      updateProgress(value) {
+        this.progressBar.style.width = `${value}%`;
+      },
+
+      renderQuestion() {
+        const track = tracks[appState.track];
+        const question = track.questions[appState.currentIndex];
+        const current = appState.currentIndex + 1;
+        const progress = Math.round((current - 1) / track.total * 100);
+        this.updateProgress(progress);
+
+        this.root.innerHTML = `
+          <section class="card fade-enter fade-enter-active question-panel">
+            <div class="question-index"><span></span> Question ${current} of ${track.total}</div>
+            <h2 class="question-copy">${question.text}</h2>
+            <div class="answer-buttons">
+              ${['Yes', 'No', 'Not Sure'].map(option => `
+                <button type="button" class="answer-button" data-answer="${option}">${option}</button>
+              `).join('')}
+            </div>
+            <div class="pager">
+              <button type="button" id="backButton" ${appState.currentIndex === 0 ? 'disabled' : ''}>Back</button>
+              <button type="button" id="nextButton">${current === track.total ? 'See Your Score' : 'Next Question'}</button>
+            </div>
+          </section>
+        `;
+
+        const selectedAnswer = appState.answers[appState.currentIndex];
+        if (selectedAnswer) {
+          const answeredButton = this.root.querySelector(`.answer-button[data-answer="${selectedAnswer}"]`);
+          if (answeredButton) answeredButton.classList.add('selected');
+        }
+
+        this.root.querySelectorAll('.answer-button').forEach(button => {
+          button.addEventListener('click', () => {
+            this.selectAnswer(button.dataset.answer);
+          });
+        });
+
+        document.getElementById('backButton').addEventListener('click', () => this.goBack());
+        document.getElementById('nextButton').addEventListener('click', () => this.goNext());
+      },
+
+      selectAnswer(answer) {
+        appState.answers[appState.currentIndex] = answer;
+        this.root.querySelectorAll('.answer-button').forEach(button => {
+          button.classList.toggle('selected', button.dataset.answer === answer);
+        });
+      },
+
+      goBack() {
+        if (appState.currentIndex > 0) {
+          appState.currentIndex -= 1;
+          this.renderQuestion();
+        } else {
+          this.renderLanding();
+        }
+      },
+
+      goNext() {
+        const track = tracks[appState.track];
+        const answer = appState.answers[appState.currentIndex];
+        if (!answer) {
+          this.shakeCurrent();
+          return;
+        }
+
+        if (appState.currentIndex < track.total - 1) {
+          appState.currentIndex += 1;
+          this.renderQuestion();
+        } else {
+          this.renderScore();
+        }
+      },
+
+      shakeCurrent() {
+        const card = this.root.querySelector('.card');
+        card.animate([
+          { transform: 'translateX(0)' },
+          { transform: 'translateX(-10px)' },
+          { transform: 'translateX(10px)' },
+          { transform: 'translateX(0)' }
+        ], { duration: 280, easing: 'ease-in-out' });
+      },
+
+      calculateScore() {
+        const track = tracks[appState.track];
+        const yesCount = appState.answers.filter(answer => answer === 'Yes').length;
+        const percent = Math.round((yesCount / track.total) * 100);
+        let tier = 'high';
+        let copy = 'You have critical exposure. This needs immediate attention.';
+        let icon = '✕';
+
+        if (percent >= 80) {
+          tier = 'low';
+          copy = 'Your legal foundation is strong. Let\'s keep it that way.';
+          icon = '⚖';
+        } else if (percent >= 50) {
+          tier = 'moderate';
+          copy = 'You have gaps that could cost you at the worst time.';
+          icon = '⚠';
+        }
+
+        return { yesCount, percent, tier, copy, icon };
+      },
+
+      renderScore() {
+        const track = tracks[appState.track];
+        const { percent, tier, copy, icon } = this.calculateScore();
+        const negativeItems = track.questions
+          .map((question, index) => ({ question, answer: appState.answers[index] }))
+          .filter(entry => entry.answer !== 'Yes');
+
+        this.updateProgress(100);
+        this.root.innerHTML = `
+          <section class="card fade-enter fade-enter-active score-shell">
+            <div class="score-badge ${tier}">${icon} ${tier === 'low' ? 'Low Risk' : tier === 'moderate' ? 'Moderate Risk' : 'High Risk'}</div>
+            <div class="score-circle" aria-hidden="true">
+              <svg viewBox="0 0 160 160">
+                <circle class="track" cx="80" cy="80" r="70"></circle>
+                <circle class="progress" cx="80" cy="80" r="70"></circle>
+              </svg>
+              <div class="score-value" id="scoreValue">0%</div>
+            </div>
+            <p class="tier-copy">${copy}</p>
+            <hr class="section-divider" />
+            <div class="breakdown">
+              <h3 style="font-family: 'Cormorant Garamond', serif; margin:0;">Areas of concern</h3>
+              ${negativeItems.map(item => `
+                <div class="breakdown-item">
+                  <strong>${item.question.text}</strong>
+                  <span>${item.question.consequence}</span>
+                </div>
+              `).join('')}
+            </div>
+            <hr class="section-divider" />
+            <div class="form-grid">
+              <div class="field-group"><label for="name">Name</label><input id="name" type="text" placeholder="Jane Doe" /></div>
+              <div class="field-group"><label for="email">Email</label><input id="email" type="email" placeholder="hello@company.com" /></div>
+              <div class="field-group"><label for="phone">WhatsApp number</label><input id="phone" type="tel" placeholder="+234 801 234 5678" /></div>
+              <div class="field-group"><label for="company">Company name</label><input id="company" type="text" placeholder="Example Ventures" /></div>
+              <div class="field-group"><label for="urgent">What's most urgent for you right now?</label>
+                <select id="urgent">
+                  <option value="CAC/Incorporation">CAC/Incorporation</option>
+                  <option value="Contracts & Agreements">Contracts & Agreements</option>
+                  <option value="NDPA Compliance">NDPA Compliance</option>
+                  <option value="AI Governance">AI Governance</option>
+                  <option value="Investor Readiness">Investor Readiness</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
+              </div>
+              <button type="button" class="submit-button" id="submitForm">Get My Free Audit Call</button>
+            </div>
+          </section>
+        `;
+
+        const progressCircle = this.root.querySelector('.progress');
+        const circumference = 2 * Math.PI * 70;
+        const offset = circumference - (percent / 100) * circumference;
+        requestAnimationFrame(() => {
+          progressCircle.style.strokeDashoffset = offset;
+          this.animateCount(percent);
+        });
+
+        document.getElementById('submitForm').addEventListener('click', () => this.submitLead());
+      },
+
+      animateCount(target) {
+        const element = document.getElementById('scoreValue');
+        let frame = 0;
+        const duration = 900;
+        const start = 0;
+        const step = () => {
+          frame += 16;
+          const progress = Math.min(frame / duration, 1);
+          const current = Math.round(start + (target - start) * progress);
+          element.textContent = `${current}%`;
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      },
+
+      submitLead() {
+        const payload = {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          company: document.getElementById('company').value.trim(),
+          urgency: document.getElementById('urgent').value,
+          track: tracks[appState.track].label,
+          score: this.calculateScore(),
+        };
+
+        console.log('Lead submission:', payload);
+        // In a production build, replace this console.log with a Formspree, EmailJS, or custom API endpoint.
+        this.renderConfirmation(payload);
+      },
+
+      renderConfirmation(payload) {
+        this.updateProgress(100);
+        this.root.innerHTML = `
+          <section class="card fade-enter fade-enter-active confirmation">
+            <div style="display:inline-flex;padding:12px 18px;border-radius:999px;background: rgba(201,168,76,0.15);color: var(--accent);font-weight:700;">Submission received</div>
+            <h2 class="title" style="font-size: clamp(2rem, 4vw, 2.8rem);">Thank you, ${payload.name || 'Founder'}.</h2>
+            <p>Your LexSuite Legal Health Check request has been captured. Lukman Asinmi, Esq. will review your diagnostic and reach out via the details you provided.</p>
+            <div class="contact-list">
+              <div><strong>Firm:</strong> LexSuite Solicitors</div>
+              <div><strong>Website:</strong> <a href="https://juristech.com.ng" target="_blank" rel="noreferrer">juristech.com.ng</a></div>
+              <div><strong>Contact:</strong> Lukman Asinmi, Esq.</div>
+              <div><strong>LinkedIn:</strong> <a href="#" target="_blank" rel="noreferrer">linkedin.com/company/lexsuite</a></div>
+            </div>
+            <button type="button" class="restart-button" id="restartButton">Restart assessment</button>
+          </section>
+        `;
+
+        document.getElementById('restartButton').addEventListener('click', () => this.renderLanding());
+      },
+    };
+
+    document.addEventListener('DOMContentLoaded', () => app.init());
+  </script>
+</body>
+</html>
