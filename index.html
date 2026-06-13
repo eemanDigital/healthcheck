@@ -1246,6 +1246,12 @@
                     ${data.leadOptions.map((option) => `<option value="${option}">${option}</option>`).join("")}
                   </select>
                 </div>
+                <div class="field-group full" style="display:flex;flex-direction:column;gap:10px">
+                  <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.85rem;color:var(--text-muted)">
+                    <input type="checkbox" id="consent" required style="margin-top:3px;accent-color:var(--gold)" />
+                    <span>I consent to LexSuite Solicitors processing my personal data (name, email, phone, company) for the purpose of following up on my legal health check. I understand my data will not be shared with third parties. <a href="#" style="color:var(--gold)" onclick="alert('LexSuite Solicitors uses your data solely to contact you regarding your legal health check. Your data is not sold or shared with third parties. For inquiries, contact Lukman Asinmi, Esq. via email@juristech.com.ng');return false">Privacy Policy</a></span>
+                  </label>
+                </div>
                 <button type="button" class="submit-button" id="submitForm">Get my free audit call</button>
               </div>
             </section>
@@ -1275,7 +1281,7 @@
                 <div class="row"><span>Contact</span><span>Lukman Asinmi, Esq.</span></div>
                 <div class="row"><span>LinkedIn</span><a href="#" target="_blank" rel="noreferrer">linkedin.com/company/lexsuite</a></div>
               </div>
-              <a href="https://wa.me/2347000000000?text=Hi%20LexSuite%2C%20I%20just%20completed%20my%20legal%20health%20check%20and%20would%20like%20to%20discuss%20next%20steps." target="_blank" rel="noreferrer" class="whatsapp-button">
+              <a href="https://wa.me/2349021649021?text=Hi%20LexSuite%2C%20I%20just%20completed%20my%20legal%20health%20check%20and%20would%20like%20to%20discuss%20next%20steps." target="_blank" rel="noreferrer" class="whatsapp-button">
                 Message on WhatsApp
               </a>
               <button type="button" class="restart-button" id="restartButton">Take another assessment</button>
@@ -1355,6 +1361,13 @@
         async submitLead() {
           const submitBtn = document.getElementById("submitForm");
           const originalText = submitBtn.textContent;
+
+          const consent = document.getElementById("consent");
+          if (!consent.checked) {
+            utils.shake(".form-grid");
+            return;
+          }
+
           submitBtn.textContent = "Sending...";
           submitBtn.disabled = true;
 
@@ -1375,20 +1388,10 @@
               body: JSON.stringify(payload),
             });
 
+            const result = await response.json();
+
             if (!response.ok) {
-              // Try to parse JSON error, fall back to text
-              let errText = null;
-              try {
-                const json = await response.json();
-                errText = json.error || json.message || JSON.stringify(json);
-              } catch (e) {
-                try {
-                  errText = await response.text();
-                } catch (e2) {
-                  errText = response.statusText || `Error ${response.status}`;
-                }
-              }
-              throw new Error(errText || "Failed to submit lead");
+              throw new Error(result.error || `Error ${response.status}`);
             }
 
             render.confirmation(payload);

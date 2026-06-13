@@ -25,15 +25,25 @@
 
 ```bash
 BREVO_API_KEY=xkeysib-xxxxxxxxxxxxxxxxxxxxxx
-YOUR_EMAIL=lukman@juristech.com.ng
-WHATSAPP_NUMBER=2347000000000
+YOUR_EMAIL=eemandigitalconcept@gmail.com
+BREVO_SENDER_EMAIL=eemandigitalconcept@gmail.com
+WHATSAPP_NUMBER=2349021649021
 ```
 
 ### Replace the values:
 
 - **BREVO_API_KEY** — Your actual Brevo API key
 - **YOUR_EMAIL** — Where you receive lead notifications
+- **BREVO_SENDER_EMAIL** — The "from" address for all emails. **This MUST be verified in your Brevo account** (Brevo → Senders → Add/verify email). If not set, falls back to `YOUR_EMAIL`.
 - **WHATSAPP_NUMBER** — Your WhatsApp number (include country code, no + or spaces)
+
+### ⚠️ Critical: Sender Verification
+
+If you do not verify `BREVO_SENDER_EMAIL` in your Brevo account, **all emails will be silently rejected by Brevo**. To verify:
+1. Go to [Brevo Senders](https://app.brevo.com/senders/)
+2. Click "Add a Sender" → enter your email
+3. Check your inbox for the verification email and click confirm
+4. That sender can now be used in the API
 
 ---
 
@@ -42,10 +52,10 @@ WHATSAPP_NUMBER=2347000000000
 Edit `index.html` and find the WhatsApp link (search for "wa.me"):
 
 ```html
-<a href="https://wa.me/2347000000000?text=..."></a>
+<a href="https://wa.me/2349021649021?text=..."></a>
 ```
 
-Replace `2347000000000` with your actual WhatsApp number.
+Replace the number with your actual WhatsApp number (country code, no `+`).
 
 ---
 
@@ -66,6 +76,7 @@ git push
 - Add:
   - Name: `BREVO_API_KEY` → Value: (your key)
   - Name: `YOUR_EMAIL` → Value: (your email)
+  - Name: `BREVO_SENDER_EMAIL` → Value: (verified sender email)
 
 ### 3. Redeploy:
 
@@ -108,10 +119,12 @@ git push
 
 ### Email not sending?
 
-1. Check API key is correct in `.env.local` or Vercel settings
-2. Verify email addresses are valid
-3. Check browser console for error messages
-4. Test with Brevo dashboard directly
+1. **Check sender is verified** — Go to Brevo → Senders. Is `BREVO_SENDER_EMAIL` listed as verified? If not, verify it.
+2. Check API key is correct in `.env.local` or Vercel settings
+3. Verify email addresses are valid
+4. Check browser console for error messages
+5. Check Vercel Functions logs for Brevo API error details
+6. Test with Brevo dashboard directly
 
 ### WhatsApp link not working?
 
