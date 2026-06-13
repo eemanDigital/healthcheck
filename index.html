@@ -1376,8 +1376,19 @@
             });
 
             if (!response.ok) {
-              const error = await response.json();
-              throw new Error(error.error || "Failed to submit lead");
+              // Try to parse JSON error, fall back to text
+              let errText = null;
+              try {
+                const json = await response.json();
+                errText = json.error || json.message || JSON.stringify(json);
+              } catch (e) {
+                try {
+                  errText = await response.text();
+                } catch (e2) {
+                  errText = response.statusText || `Error ${response.status}`;
+                }
+              }
+              throw new Error(errText || "Failed to submit lead");
             }
 
             render.confirmation(payload);

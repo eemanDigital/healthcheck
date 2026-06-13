@@ -1,4 +1,14 @@
 export default async function handler(req, res) {
+  // CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle preflight
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -55,7 +65,7 @@ export default async function handler(req, res) {
         <p>In the meantime, connect with LexSuite Solicitors:</p>
         <ul>
           <li><strong>Website:</strong> <a href="https://juristech.com.ng">juristech.com.ng</a></li>
-          <li><strong>WhatsApp:</strong> <a href="https://wa.me/2347000000000">Message us on WhatsApp</a></li>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/09021649021">Message us on WhatsApp</a></li>
         </ul>
       `,
     });
@@ -94,9 +104,25 @@ async function sendBrevoEmail({ apiKey, to, subject, htmlContent, replyTo }) {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(`Brevo API error: ${JSON.stringify(error)}`);
+    // Try to parse JSON error, fall back to text
+    let errBody = null;
+    try {
+      errBody = await response.json();
+    } catch (e) {
+      try {
+        errBody = await response.text();
+      } catch (e2) {
+        errBody = `Status ${response.status}`;
+      }
+    }
+    throw new Error(
+      `Brevo API error: ${typeof errBody === "string" ? errBody : JSON.stringify(errBody)}`,
+    );
   }
 
-  return await response.json();
+  try {
+    return await response.json();
+  } catch (e) {
+    return { ok: true };
+  }
 }
