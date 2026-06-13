@@ -77,7 +77,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Email submission error:", error);
     res.status(500).json({
-      error: "Failed to submit lead",
+      error: "Failed to submit",
       details: error.message,
     });
   }
