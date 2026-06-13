@@ -1,27 +1,27 @@
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   const { name, email, phone, company, urgency, track, score } = req.body;
 
   // Validation
   if (!name || !email || !phone || !company) {
-    return res.status(400).json({ error: 'Missing required fields' });
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
   const brevoApiKey = process.env.BREVO_API_KEY;
-  const yourEmail = process.env.YOUR_EMAIL || 'lukman@juristech.com.ng';
+  const yourEmail = process.env.YOUR_EMAIL || "lukman@juristech.com.ng";
 
   if (!brevoApiKey) {
-    return res.status(500).json({ error: 'Email service not configured' });
+    return res.status(500).json({ error: "Email service not configured" });
   }
 
   try {
     // Send lead notification email to you
     await sendBrevoEmail({
       apiKey: brevoApiKey,
-      to: [{ email: yourEmail, name: 'LexSuite Team' }],
+      to: [{ email: yourEmail, name: "LexSuite Team" }],
       subject: `New Lead: ${name} - ${track}`,
       htmlContent: `
         <h2>New Legal Health Check Submission</h2>
@@ -35,14 +35,14 @@ export default async function handler(req, res) {
         <hr />
         <p>Reply directly to ${email} or call ${phone}</p>
       `,
-      replyTo: { email, name }
+      replyTo: { email, name },
     });
 
     // Send confirmation email to the user
     await sendBrevoEmail({
       apiKey: brevoApiKey,
       to: [{ email, name }],
-      subject: 'Your LexSuite Legal Health Check - Next Steps',
+      subject: "Your LexSuite Legal Health Check - Next Steps",
       htmlContent: `
         <h2>Thank you, ${name}!</h2>
         <p>Your legal health diagnostic has been received and reviewed.</p>
@@ -57,40 +57,40 @@ export default async function handler(req, res) {
           <li><strong>Website:</strong> <a href="https://juristech.com.ng">juristech.com.ng</a></li>
           <li><strong>WhatsApp:</strong> <a href="https://wa.me/2347000000000">Message us on WhatsApp</a></li>
         </ul>
-      `
+      `,
     });
 
     res.status(200).json({
       success: true,
-      message: 'Lead submitted successfully'
+      message: "Lead submitted successfully",
     });
   } catch (error) {
-    console.error('Email submission error:', error);
+    console.error("Email submission error:", error);
     res.status(500).json({
-      error: 'Failed to submit lead',
-      details: error.message
+      error: "Failed to submit lead",
+      details: error.message,
     });
   }
 }
 
 async function sendBrevoEmail({ apiKey, to, subject, htmlContent, replyTo }) {
-  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-    method: 'POST',
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
     headers: {
-      'accept': 'application/json',
-      'api-key': apiKey,
-      'content-type': 'application/json'
+      accept: "application/json",
+      "api-key": apiKey,
+      "content-type": "application/json",
     },
     body: JSON.stringify({
       sender: {
-        name: 'LexSuite Solicitors',
-        email: 'noreply@juristech.com.ng'
+        name: "LexSuite Solicitors",
+        email: "noreply@juristech.com.ng",
       },
       to,
       subject,
       htmlContent,
-      replyTo
-    })
+      replyTo,
+    }),
   });
 
   if (!response.ok) {

@@ -30,6 +30,7 @@ WHATSAPP_NUMBER=2347000000000
 ```
 
 ### Replace the values:
+
 - **BREVO_API_KEY** — Your actual Brevo API key
 - **YOUR_EMAIL** — Where you receive lead notifications
 - **WHATSAPP_NUMBER** — Your WhatsApp number (include country code, no + or spaces)
@@ -41,7 +42,7 @@ WHATSAPP_NUMBER=2347000000000
 Edit `index.html` and find the WhatsApp link (search for "wa.me"):
 
 ```html
-<a href="https://wa.me/2347000000000?text=...">
+<a href="https://wa.me/2347000000000?text=..."></a>
 ```
 
 Replace `2347000000000` with your actual WhatsApp number.
@@ -51,6 +52,7 @@ Replace `2347000000000` with your actual WhatsApp number.
 ## Step 4: Vercel Deployment
 
 ### 1. Push to Git:
+
 ```bash
 git add .
 git commit -m "Add email and WhatsApp integration"
@@ -58,6 +60,7 @@ git push
 ```
 
 ### 2. In Vercel Dashboard:
+
 - Go to your project settings
 - Click **Environment Variables**
 - Add:
@@ -65,6 +68,7 @@ git push
   - Name: `YOUR_EMAIL` → Value: (your email)
 
 ### 3. Redeploy:
+
 - Vercel will auto-deploy when it detects the changes
 - Or manually trigger a deployment
 
@@ -117,6 +121,7 @@ git push
 ### Still have issues?
 
 Check the `api/submit-lead.js` serverless function logs:
+
 - In Vercel Dashboard → Functions → `submit-lead`
 
 ---
